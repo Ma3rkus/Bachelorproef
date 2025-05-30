@@ -1,0 +1,52 @@
+%%=============================================================================
+%% Samenvatting
+%%=============================================================================
+
+% TODO: De "abstract" of samenvatting is een kernachtige (~ 1 blz. voor een
+% thesis) synthese van het document.
+%
+% Een goede abstract biedt een kernachtig antwoord op volgende vragen:
+%
+% 1. Waarover gaat de bachelorproef?
+% 2. Waarom heb je er over geschreven?
+% 3. Hoe heb je het onderzoek uitgevoerd?
+% 4. Wat waren de resultaten? Wat blijkt uit je onderzoek?
+% 5. Wat betekenen je resultaten? Wat is de relevantie voor het werkveld?
+%
+% Daarom bestaat een abstract uit volgende componenten:
+%
+% - inleiding + kaderen thema
+% - probleemstelling
+% - (centrale) onderzoeksvraag
+% - onderzoeksdoelstelling
+% - methodologie
+% - resultaten (beperk tot de belangrijkste, relevant voor de onderzoeksvraag)
+% - conclusies, aanbevelingen, beperkingen
+%
+% LET OP! Een samenvatting is GEEN voorwoord!
+
+%%---------- Nederlandse samenvatting -----------------------------------------
+%
+% TODO: Als je je bachelorproef in het Engels schrijft, moet je eerst een
+% Nederlandse samenvatting invoegen. Haal daarvoor onderstaande code uit
+% commentaar.
+% Wie zijn bachelorproef in het Nederlands schrijft, kan dit negeren, de inhoud
+% wordt niet in het document ingevoegd.
+
+% \IfLanguageName{english}{%
+% \selectlanguage{dutch}
+% \chapter*{Samenvatting}
+% \lipsum[1-4]
+% \selectlanguage{english}
+% }{}
+
+%%---------- Samenvatting -----------------------------------------------------
+% De samenvatting in de hoofdtaal van het document
+
+\chapter*{\IfLanguageName{dutch}{Samenvatting}{Abstract}}
+%TODO: Rewrite
+
+Communicatie is een heel belangrijk onderdeel van een goede werking van een ziekenhuis. Toch is het meest gebruikte communicatiesysteem in ziekenhuizen sinds 1993 niet veranderd van principe. Dit principe/systeem is het \gls{dect}-systeem. Dit onderzoek focust zich op het onderzoeken van de mogelijke technologieën die kunnen worden ingezet om de communicatie aan te pakken in de gezondheidszorg. De reden van dit onderzoek is om een kwaliteitsvol alternatief te bieden voor de vervanging van het \gls{dect}-systeem. Een reden voor deze vervanging is dat deze aanleiding geeft tot alarmmoeheid.\\
+Volgens \textcite{Ferrara2023} kan alarmmoeheid worden omschreven als ''een overprikkeling of zintuiglijke overbelasting, instaat tot het veroorzaken van gevoelloosheid ten opzichte van alarmen door een te groot aantal alarmen die foutief of klinisch onbelangrijk zijn.''.\\ Eerst zal er breed worden gekeken naar alle mogelijke innovaties, nadien wordt er gefocust op een toepassing van een privaat 5G-netwerk. \\\\
+Vervolgens wordt er een \gls{poc} gemaakt. Dit is een 5G netwerk-simulatie, lokaal op de laptop van de student. Deze \gls{poc} wordt ook vervolgens geautomatiseerd. Er wordt nadien gekeken naar de mogelijke stappen om deze simulatie om te zetten naar een praktische realisatie.\\\\
+De conclusie stelt dat 5G de beste keuze is op vlak van technologische vervanger van het \gls{dect}-systeem, net omwille van zijn brede waaier aan instellingen en opties voor slicing. Echter moet men ook de kanttekening maken dat dit een economisch intensieve investering is, die om dit moment nog niet verantwoord kan worden omwille van het missen van bepaalde features. Deze kunnen tijdelijk worden opgevangen met workarounds zoals wordt aangehaald in de stand van zaken. Deze bachelorproef stelt 2 opties voor, indien men vandaag een vervanging moet doen met een beperkt budget. De eerste is de nieuwste versie van het \gls{dect}-systeem, ook wel het \gls{ule}-systeem genoemd. De tweede is een overschakeling naar een combinatie van Wi-Fi en \gls{voip}. Maar in het einde blijft het een afweging tussen de kost en de productiviteitsboost door onder andere de alarmmoeheid vermindering.

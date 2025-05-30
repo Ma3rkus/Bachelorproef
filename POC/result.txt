@@ -1,0 +1,217 @@
+vagrant@Centrale:~/UERANSIM/build$ sudo ./nr-ue -c ../config/open5gs-ue.yaml
+
+UERANSIM v3.2.7
+[2025-05-29 08:05:17.683] [nas] [info] UE switches to state [MM-DEREGISTERED/PLMN-SEARCH]
+[2025-05-29 08:05:17.685] [rrc] [debug] New signal detected for cell[1], total [1] cells in coverage
+[2025-05-29 08:05:17.685] [nas] [info] Selected plmn[999/70]
+[2025-05-29 08:05:17.685] [rrc] [info] Selected cell plmn[999/70] tac[1] category[SUITABLE]
+[2025-05-29 08:05:17.685] [nas] [info] UE switches to state [MM-DEREGISTERED/PS]
+[2025-05-29 08:05:17.685] [nas] [info] UE switches to state [MM-DEREGISTERED/NORMAL-SERVICE]
+[2025-05-29 08:05:17.685] [nas] [debug] Initial registration required due to [MM-DEREG-NORMAL-SERVICE]
+[2025-05-29 08:05:17.685] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2025-05-29 08:05:17.686] [nas] [debug] Sending Initial Registration
+[2025-05-29 08:05:17.686] [nas] [info] UE switches to state [MM-REGISTER-INITIATED]
+[2025-05-29 08:05:17.686] [rrc] [debug] Sending RRC Setup Request
+[2025-05-29 08:05:17.687] [rrc] [info] RRC connection established
+[2025-05-29 08:05:17.688] [rrc] [info] UE switches to state [RRC-CONNECTED]
+[2025-05-29 08:05:17.688] [nas] [info] UE switches to state [CM-CONNECTED]
+[2025-05-29 08:05:17.697] [nas] [debug] Authentication Request received
+[2025-05-29 08:05:17.697] [nas] [debug] Received SQN [000000000101]
+[2025-05-29 08:05:17.697] [nas] [debug] SQN-MS [000000000000]
+[2025-05-29 08:05:17.701] [nas] [debug] Security Mode Command received
+[2025-05-29 08:05:17.702] [nas] [debug] Selected integrity[2] ciphering[0]
+[2025-05-29 08:05:17.713] [nas] [debug] Registration accept received
+[2025-05-29 08:05:17.713] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2025-05-29 08:05:17.713] [nas] [debug] Sending Registration Complete
+[2025-05-29 08:05:17.713] [nas] [info] Initial Registration is successful
+[2025-05-29 08:05:17.713] [nas] [debug] Sending PDU Session Establishment Request
+[2025-05-29 08:05:17.714] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2025-05-29 08:05:17.921] [nas] [debug] Configuration Update Command received
+[2025-05-29 08:05:17.949] [nas] [debug] PDU Session Establishment Accept received
+[2025-05-29 08:05:17.949] [nas] [info] PDU Session establishment is successful PSI[1]
+[2025-05-29 08:05:17.969] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.45.0.8] is up.
+
+
+
+vagrant@ue:~/UERANSIM/build$ ./nr-gnb -c ../config/open5gs-gnb.yaml
+UERANSIM v3.2.7
+[2025-05-29 10:23:08.261] [sctp] [info] Trying to establish SCTP connection... (10.0.0.10:38412)
+[2025-05-29 10:23:08.343] [sctp] [info] SCTP connection established (10.0.0.10:38412)
+[2025-05-29 10:23:08.343] [sctp] [debug] SCTP association setup ascId[3]
+[2025-05-29 10:23:08.343] [ngap] [debug] Sending NG Setup Request
+[2025-05-29 10:23:08.349] [ngap] [debug] NG Setup Response received
+[2025-05-29 10:23:08.349] [ngap] [info] NG Setup procedure is successful
+[2025-05-29 10:23:59.177] [rrc] [debug] UE[1] new signal detected
+[2025-05-29 10:23:59.179] [rrc] [info] RRC Setup for UE[1]
+[2025-05-29 10:23:59.180] [ngap] [debug] Initial NAS message received from UE[1]
+[2025-05-29 10:23:59.207] [ngap] [debug] Initial Context Setup Request received
+[2025-05-29 10:23:59.439] [ngap] [info] PDU session resource(s) setup for UE[1] count[1]
+[2025-05-29 10:24:04.086] [rls] [debug] UE[1] signal lost
+[2025-05-29 10:24:05.848] [rrc] [debug] UE[2] new signal detected
+[2025-05-29 10:24:05.850] [rrc] [info] RRC Setup for UE[2]
+[2025-05-29 10:24:05.851] [ngap] [debug] Initial NAS message received from UE[2]
+[2025-05-29 10:24:05.867] [ngap] [debug] UE Context Release Command received
+[2025-05-29 10:24:05.867] [rrc] [info] Releasing RRC connection for UE[1]
+[2025-05-29 10:24:05.874] [ngap] [debug] Initial Context Setup Request received
+[2025-05-29 10:24:06.094] [ngap] [info] PDU session resource(s) setup for UE[2] count[1]
+
+
+
+vagrant@ue:~$ ping -I uesimtun0 google.Com
+PING google.Com (172.217.20.206) from 10.45.0.3 uesimtun0: 56(84) bytes of data.
+64 bytes from par10s41-in-f14.1e100.net (142.250.75.238): icmp_seq=6182 ttl=116 time=25.1 ms
+64 bytes from par10s41-in-f14.1e100.net (142.250.75.238): icmp_seq=6183 ttl=116 time=41.6 ms
+64 bytes from par10s41-in-f14.1e100.net (142.250.75.238): icmp_seq=6184 ttl=116 time=30.3 ms
+64 bytes from par10s41-in-f14.1e100.net (142.250.75.238): icmp_seq=6185 ttl=116 time=38.5 ms
+64 bytes from par10s41-in-f14.1e100.net (142.250.75.238): icmp_seq=6186 ttl=116 time=23.5 ms
+--- google.Com ping statistics ---
+6198 packets transmitted, 6195 received, 0.0484027% packet loss, time 6231019ms
+rtt min/avg/max/mdev = 21.394/27.963/159.611/7.694 ms
+vagrant@ue:~$
+
+
+
+vagrant@ue:~$ curl --interface uesimtun0 -X GET "https://httpbin.org/get"
+{
+  "args": {},
+  "headers": {
+    "Accept": "*/*",
+    "Host": "httpbin.org",
+    "User-Agent": "curl/8.5.0",
+    "X-Amzn-Trace-Id": "Root=1-683836c9-7cca29e43a4cd009264470d9"
+  },
+  "origin": "91.179.82.137",
+  "url": "https://httpbin.org/get"
+}
+
+
+logger:
+  file:
+    path: /var/log/open5gs/upf.log
+#  level: info   # fatal|error|warn|info(default)|debug|trace
+
+global:
+  max:
+    ue: 1024  # The number of UE can be increased depending on memory size.
+#    peer: 64
+
+upf:
+  pfcp:
+    server:
+      - address: 127.0.0.7
+    client:
+#      smf:     #  UPF PFCP Client try to associate SMF PFCP Server
+#        - address: 127.0.0.4
+  gtpu:
+    server:
+      - address: 10.0.0.10
+  session:
+    - subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+    - subnet: 2001:db8:cafe::/48
+      gateway: 2001:db8:cafe::1
+  metrics:
+    server:
+      - address: 127.0.0.7
+        port: 9090
+
+
+vagrant@ue:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:e1:3d:ae brd ff:ff:ff:ff:ff:ff
+    altname enp0s3
+    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
+       valid_lft 76464sec preferred_lft 76464sec
+    inet6 fe80::a00:27ff:fee1:3dae/64 scope link
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:d2:32:c5 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    inet 10.0.0.11/24 brd 10.0.0.255 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fed2:32c5/64 scope link
+       valid_lft forever preferred_lft forever
+7: uesimtun0: <POINTOPOINT,PROMISC,NOTRAILERS,UP,LOWER_UP> mtu 1400 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none
+    inet 10.45.0.6/24 scope global uesimtun0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::d55b:6f3f:aa19:fcf7/64 scope link stable-privacy
+       valid_lft forever preferred_lft forever
+
+
+
+vagrant@ue:~$ ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::a00:27ff:fee1:3dae  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:e1:3d:ae  txqueuelen 1000  (Ethernet)
+        RX packets 172152  bytes 206477435 (206.4 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 34409  bytes 3307650 (3.3 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.0.11  netmask 255.255.255.0  broadcast 10.0.0.255
+        inet6 fe80::a00:27ff:fed2:32c5  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:d2:32:c5  txqueuelen 1000  (Ethernet)
+        RX packets 9210  bytes 1282569 (1.2 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 8113  bytes 1087090 (1.0 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 29581  bytes 2701157 (2.7 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 29581  bytes 2701157 (2.7 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+uesimtun0: flags=369<UP,POINTOPOINT,NOTRAILERS,RUNNING,PROMISC>  mtu 1400
+        inet 10.45.0.6  netmask 255.255.255.0  destination 10.45.0.6
+        inet6 fe80::d55b:6f3f:aa19:fcf7  prefixlen 64  scopeid 0x20<link>
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 500  (UNSPEC)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 8  bytes 496 (496.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+
+
+        vagrant@Centrale:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:e1:3d:ae brd ff:ff:ff:ff:ff:ff
+    altname enp0s3
+    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
+       valid_lft 75360sec preferred_lft 75360sec
+    inet6 fe80::a00:27ff:fee1:3dae/64 scope link
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:77:a3:88 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    inet 10.0.0.10/24 brd 10.0.0.255 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe77:a388/64 scope link
+       valid_lft forever preferred_lft forever
+4: ogstun: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1400 qdisc fq_codel state UP group default qlen 500
+    link/none
+    inet 10.45.0.1/16 brd 10.45.255.255 scope global ogstun
+       valid_lft forever preferred_lft forever
+    inet6 2001:db8:cafe::1/48 scope global
+       valid_lft forever preferred_lft forever
+    inet6 fe80::374e:8270:9762:52a6/64 scope link stable-privacy
+       valid_lft forever preferred_lft forever

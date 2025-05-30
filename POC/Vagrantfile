@@ -1,0 +1,59 @@
+
+# Vagrant automation POC
+#  2024-2025
+# ------------------------------------
+#                                      
+# This is the Vagrantfile based on the template of Windows Server II - 2024-2025. 
+#
+# Use `vagrant up` to bring up the environment, 
+#   or `vagrant reload` to redeploy the environment after changing this file.
+# ------------------------------------
+
+Vagrant.configure("2") do |config|
+    config.vm.provider "virtualbox" do |vb|
+    # Stel de gedeelde map in om automatisch te mounten
+    vb.customize ["sharedfolder", "add", :id, "--name", "vagrant_data", "--hostpath", ".", "--automount"]
+    end
+
+    # Server 1
+    config.vm.define "conductor" do |cond|
+        # This is the base image for the VM - do not change this!
+        cond.vm.box = "gusztavvargadr/ubuntu-server"
+        cond.vm.box_version = "2404.0.2503"
+        cond.vm.network "private_network", ip: "10.0.0.10"
+        # Set the host name of the VM
+        cond.vm.hostname = "Centrale"
+        # Set portforwarding
+        cond.vm.network "forwarded_port", guest: 9999, host: 9999, host_ip: "127.0.0.1", id: "open5gs"
+        # VirtualBox specific configuration
+        cond.vm.provider "virtualbox" do |vb|
+            # VirtualBox Display Name
+            vb.name = "Centrale"
+            # VirtualBox Group
+            vb.customize ["modifyvm", :id, "--groups", "/BPoc"]
+            # 1GB vRAM
+            vb.memory = "8192"
+            # 1vCPU
+            vb.cpus = "2"
+        end
+        cond.vm.provision "shell", path: "script-cent.sh"
+    end
+
+    config.vm.define "member" do |memb|
+        memb.vm.box = "gusztavvargadr/ubuntu-server"
+        memb.vm.box_version = "2404.0.2503"
+        memb.vm.network "private_network", ip: "10.0.0.11"
+        memb.vm.hostname = "ue"
+        memb.vm.provider "virtualbox" do |vb2|
+            # VirtualBox Display Name
+            vb2.name = "UE"
+            # VirtualBox Group
+            vb2.customize ["modifyvm", :id, "--groups", "/BPoc"]
+            # 1GB vRAM
+            vb2.memory = "4096"
+            # 1vCPU
+            vb2.cpus = "2"
+        end
+        memb.vm.provision "shell", path: "script-ue.sh"
+    end
+end

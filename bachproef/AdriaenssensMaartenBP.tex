@@ -1,0 +1,314 @@
+%===============================================================================
+% LaTeX sjabloon voor de bachelorproef toegepaste informatica aan HOGENT
+% Meer info op https://github.com/HoGentTIN/latex-hogent-report
+%===============================================================================
+
+\documentclass[dutch,dit,thesis]{hogentreport}
+
+% TODO:
+% - If necessary, replace the option `dit`' with your own department!
+%   Valid entries are dbo, dbt, dgz, dit, dlo, dog, dsa, soa
+% - If you write your thesis in English (remark: only possible after getting
+%   explicit approval!), remove the option "dutch," or replace with "english".
+
+\usepackage{lipsum} % For blind text, can be removed after adding actual content
+
+%% Pictures to include in the text can be put in the graphics/ folder
+\graphicspath{{../graphics/}}
+
+%% For source code highlighting, requires pygments to be installed
+%% Compile with the -shell-escape flag!
+\usepackage[chapter]{minted}
+%% If you compile with the make_thesis.{bat,sh} script, use the following
+%% import instead:
+% \usepackage[chapter,outputdir=../output]{minted}
+% \usemintedstyle{solarized-light}
+
+%% Formatting for minted environments.
+\setminted{%
+    autogobble,
+    frame=lines,
+    breaklines,
+    linenos,
+    tabsize=4
+}
+
+%% Ensure the list of listings is in the table of contents
+\renewcommand\listoflistingscaption{%
+    \IfLanguageName{dutch}{Lijst van codefragmenten}{List of listings}
+}
+\renewcommand\listingscaption{%
+    \IfLanguageName{dutch}{Codefragment}{Listing}
+}
+\renewcommand*\listoflistings{%
+    \cleardoublepage\phantomsection\addcontentsline{toc}{chapter}{\listoflistingscaption}%
+    \listof{listing}{\listoflistingscaption}%
+}
+
+% Other packages not already included can be imported here
+\usepackage{listings}
+\usepackage[numbers]{natbib}
+\usepackage{float}
+\usepackage{tabularx}
+%%---------- Afkortingen en woordverklaringen -------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[acronym, toc]{glossaries}
+
+\setacronymstyle{long-sc-short}
+
+\makeglossaries
+
+%Word breaks
+\hyphenation{DECT-systemen}
+\hyphenation{5G-technologie}
+\hyphenation{5G-netwerk}
+% \hyphenation{zorg-simulaties}
+%Áfkoringen
+
+\newacronym{dect}{DECT}{Digital Enhanced Cordless Telecommunications}
+\newacronym{poc}{PoC}{Proof of concept}
+\newacronym{lte}{LTE}{Long Term Evolution}
+\newacronym{voip}{VoIP}{Voice over IP}
+\newacronym{qos}{QOS}{Quality of Service}
+\newacronym{ran}{RAN}{Radio Access Network}
+\newacronym{ai}{AI}{Artificiële Intelligentie}
+\newacronym{o-ran}{O-RAN}{Open Radio Access Network}
+\newacronym{5gnr}{5G NR}{Fifth Generation New Radio}
+\newacronym{oam}{OAM}{Operations, Administration \& Maintenance}
+\newacronym{osi}{OSI}{Open Systems Interconnection}
+\newacronym{ule}{ULE}{Ultra low energy}
+\newacronym{cat-iq}{CAT-iq}{Cordless Advanced Technology \-internet \& quality}
+\newacronym{pstn}{PSTN}{Public Switched Telephone Network}
+\newacronym{voipsa}{VOIPSA}{Voice over IP Security Alliance}
+\newacronym{cia}{CIA}{confidentiality, integrity, availability}
+\newacronym{b2h}{B2H}{Blockchain to Healthcare}
+\newacronym{bits}{BITS}{Blockchain-driven Intelligent Scheme for Telesurgery System}
+\newacronym{gdpr}{GDPR}{General Data Protection Regulation}
+\newacronym{nis2}{NIS2}{Network and Information Security 2-richtlijn}
+\newacronym{ehds}{EHDS}{European Healthcare Data Space}
+\newacronym{sdr}{SDR}{Software Defined Radio}
+\newacronym{ue}{UE}{User Equipment}
+\newacronym{srs}{SRS}{Software Radio Systems}
+\newacronym{e2e}{E2E}{End-to-end}
+\newacronym{pdu}{PDU}{Protocol Data Unit}
+\newacronym{udr}{UDR}{Unified Data Repository}
+\newacronym{sa}{SA}{Stand-alone}
+\newacronym{nsa}{NSA}{Non Stand-alone}
+\newacronym{nas}{NAS}{Non-Access Stratum}
+\newacronym{ngap}{NGAP}{Next Generation Application Protocol}
+\newacronym{sbi}{SBI}{Service Based Interface}
+\newacronym{mvp}{MVP}{Minimu Viable Product}
+\newacronym{vm}{VM}{Virtual Machine}
+\newacronym{os}{OS}{Operating System}
+\newacronym{mme}{MME}{Mobility Management Entity}
+\newacronym{hss}{HSS}{Home Subscriber Server}
+\newacronym{pcrf}{PCRF}{Policy and Charging Rules Function}
+\newacronym{sgwc}{SWGC}{Serving Gateway Control Plane}
+\newacronym{sgwu}{SGWU}{Serving Gateway User Plane}
+\newacronym{pgwc-smf}{PGWC/SMF}{Packet Gateway Control Plane}
+\newacronym{pgwc-upf}{PWGC/UPF}{Packet Gateway User Plane}
+\newacronym{nrf}{NRF}{NF Repository Function}
+\newacronym{scp}{SCP}{Service Communication Proxy}
+\newacronym{sepp}{SEPP}{Security Edge Protection Proxy}
+\newacronym{amf}{AMF}{Access and Mobility Management Function}
+\newacronym{smf}{SMF}{Session Management Function}
+\newacronym{upf}{UPF}{User Plane Function}
+\newacronym{ausf}{AUSF}{Authentication Server Function}
+\newacronym{udm}{UDM}{Unified Data Management}
+\newacronym{pcf}{PCF}{Policy Control Function}
+\newacronym{nssf}{NSSF}{Network Slice Selection Function}
+\newacronym{bsf}{BSF}{Binding Support Function}
+\newacronym{sba}{SBA}{Service Based Architecture}
+\newacronym{cups}{CUPS}{Control/User Plane Separation}
+\newacronym{csma/ca}{CSMA/CA}{Carrier Sense Multiple Access with Collision Avoidance}
+\newacronym{gnb}{gNB}{gNodeB of Next Generation Node B}
+\newacronym{amf}{AMF}{Authentication Management Field}
+\newacronym{imsi}{IMSI}{international mobile subscriber identity}
+\newacronym{gtp}{GTP}{GPRS Tunnelling Protocol}
+\newacronym{ciot}{CIoT}{Cellular Internet of Things}
+\newacronym{capex}{CapEx}{Capital Expenditures}
+\newacronym{opex}{OpEx}{Operating Expenses}
+\newacronym{snpn}{SNPN}{Standalone Non-Public Network}
+\newacronym{gtpu}{GTPU}{GPRS Tunneling Protocol – User Plane}
+\newacronym{sctp}{SCTP}{Stream Control Transmission Protocol}
+\newacronym{tcp}{TCP}{Transmission Control Protocol}
+\newacronym{tls}{TLS}{Transport LAyerr Security}
+\newacronym{icmp}{ICMP}{Internet Control Message Protocol}
+\newacronym{sdn}{SDN}{Software Defined Network}
+\newacronym{vnf}{VNF}{Virtual Network Functions}
+\newacronym{ns}{NS}{Network Slice}
+\newacronym{s-nssai}{S-NSSAI}{Single Network Slice Selection Assistance Informatiaion}
+\newacronym{sst-id}{SST-ID}{Slice/Service Type Identifier}
+\newacronym{embb}{eMBB}{Enhanced Mobile Broadband}
+\newacronym{urllc}{URLLC}{Ultra-Reliable low-Latency Communication}
+\newacronym{sd}{SD}{Slice differentiator}
+\newacronym{miot}{MIoT}{Massive Internet of Things}
+\newacronym{v2x}{V2X}{Vehicle-to-Everything}
+\newacronym{hmtc}{HMTC}{High-performance Machine-Type Communications}
+\newacronym{hdllc}{HDLLC}{High-Data-rate and Low-Latency Communications}
+\newacronym{ddn}{DDN}{Dedicated Data Networks}
+%Woordverklaring
+\newglossaryentry{srsRAN}
+{
+    name=srsRAN,
+    description={srsRAN is een software suite. Het is een open-source collectie van 4G en 5G software radio implementaties van SRS.},
+}
+\newglossaryentry{open5gs}
+{
+    name=Open5GS,
+    description={Open-source software dat een 5G core netwerk simuleert.},
+}
+\newglossaryentry{ueransim}
+{
+    name=UERANSIM,
+    description={Open-source state-of-the-art 5G UE en RAN (gNodeB) simulator.},
+}
+
+
+
+%%---------- Document metadata -------------------------------------------------
+% Replaced this with your own information
+\author{Maarten Adriaenssens}
+\supervisor{Mevr. L. De Mol}
+\cosupervisor{Dhr. T. Cuelenaere, Dhr. J. Buysse en Dhr. M. De Dekoninck}
+\title%
+    {Integratie en vervanging van DECT-\\systemen met 5G-\-technologie voor zorg\-simulaties binnen HOGENT}
+\academicyear{\advance\year by -1 \the\year--\advance\year by 1 \the\year}
+\examperiod{2}
+\degreesought{\IfLanguageName{dutch}{Professionele bachelor in de toegepaste informatica}{Bachelor of applied computer science}}
+\partialthesis{false} %% To display 'in partial fulfilment'
+%\institution{Internshipcompany BVBA.}
+
+%% Add global exceptions to the hyphenation here
+\hyphenation{back-slash}
+
+%% The bibliography (style and settings are  found in hogentthesis.cls)
+\addbibresource{bachproef.bib}            %% Bibliography file
+\addbibresource{../voorstel/voorstel.bib} %% Bibliography research proposal
+\defbibheading{bibempty}{}
+
+%% Prevent empty pages for right-handed chapter starts in twoside mode
+\renewcommand{\cleardoublepage}{\clearpage}
+
+\renewcommand{\arraystretch}{1.2}
+
+%% Content starts here.
+\begin{document}
+
+%---------- Front matter -------------------------------------------------------
+
+\frontmatter
+
+\hypersetup{pageanchor=false} %% Disable page numbering references
+%% Render a Dutch outer title page if the main language is English
+\IfLanguageName{english}{%
+    %% If necessary, information can be changed here
+    \degreesought{Professionele Bachelor toegepaste informatica}%
+    \begin{otherlanguage}{dutch}%
+        \maketitle%
+    \end{otherlanguage}%
+}{}
+
+%% Generates title page content
+\maketitle
+\hypersetup{pageanchor=true}
+
+\input{voorwoord}
+\input{samenvatting}
+
+%---------- Inhoud, lijst figuren, ... -----------------------------------------
+
+\tableofcontents
+
+% In a list of figures, the complete caption will be included. To prevent this,
+% ALWAYS add a short description in the caption!
+%
+%  \caption[short description]{elaborate description}
+%
+% If you do, only the short description will be used in the list of figures
+
+\listoffigures
+
+% If you included tables and/or source code listings, uncomment the appropriate
+% lines.
+\listoftables
+
+\listoflistings
+
+% Als je een lijst van afkortingen of termen wil toevoegen, dan hoort die
+% hier thuis. Gebruik bijvoorbeeld de ``glossaries'' package.
+% https://www.overleaf.com/learn/latex/Glossaries
+
+%Print
+
+\setglossarystyle{listgroup}
+
+\printglossary[type=\acronymtype, title=Afkortingen, toctitle=Lijst van afkortingen]
+
+\printglossary[title=Woordverklaringen, toctitle=Lijst van woordverklaringen]
+
+%---------- Kern ---------------------------------------------------------------
+
+\mainmatter{}
+
+% De eerste hoofdstukken van een bachelorproef zijn meestal een inleiding op
+% het onderwerp, literatuurstudie en verantwoording methodologie.
+% Aarzel niet om een meer beschrijvende titel aan deze hoofdstukken te geven of
+% om bijvoorbeeld de inleiding en/of stand van zaken over meerdere hoofdstukken
+% te verspreiden!
+
+\input{inleiding}
+\input{standvanzaken}
+\input{methodologie}
+
+% Voeg hier je eigen hoofdstukken toe die de ``corpus'' van je bachelorproef
+% vormen. De structuur en titels hangen af van je eigen onderzoek. Je kan bv.
+% elke fase in je onderzoek in een apart hoofdstuk bespreken.
+
+\input{poc}
+
+\input{conclusie}
+
+%---------- Bijlagen -----------------------------------------------------------
+
+\appendix
+
+\chapter{Onderzoeksvoorstel}
+\label{ch:voorstel}
+
+Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat vooraf werd beoordeeld door de promotor. Dat voorstel is opgenomen in deze bijlage.
+
+%% TODO: 
+\section*{Samenvatting}
+Communicatie is een heel belangrijk onderdeel van een goede werking van een ziekenhuis. Toch is het meest gebruikte communicatie systeem in ziekehuizen sinds 1993 niet veranderd van principe. Dit pricipe/systeem is het DECT-systeem. Dit onderzoek focust zich op het onderzoeken van de mogelijke technologieën die kunnen worden ingezet ingezet om de communicatie aan te pakken in de gezondheidszorg. De reden van dit onderzoek is om een kwaliteitsvol alternatief te bieden voor de vervanging van het DECT-systeem. Een reden voor deze vervanging is dat deze aanleiding geeft tot alarmmoeheid.
+    Volgens \textcite{Ferrara2023} kan alarmmoeheid worden omschreven als ''een overprikkeling of zintuiglijke overbelasting, in staat tot het veroorzaken van gevoelloosheid ten opzichte van alarmen door een te groot aantal alarmen die foutief of klinisch onbelangrijk zijn.''.\\ Eerst zal er breed worden gekeken naar alle mogelijke innovaties, nadien wordt er gefocust op een toepassing van een privaat 5G-netwerk. 
+    Vervolgens worden er twee proof-of-concepts (PoC) gemaakt. De eerste is een testomgeving, lokaal op de laptop van de student. De tweede PoC is een praktische realisatie; deze wordt ontwikkeld op kleine schaal, maar met uitbreidingsmogelijkheden. Tenslotte wordt er ook onderzocht wat de kost is van een 5G-deployment. Dit wordt verwerkt zodat er een overzicht is van wanneer een ziekenhuis het zou overwegen om de kosten te kunnen verantwoorden.\\
+    Er wordt verwacht dat de PoC's beiden worden gerealiseerd en een overzicht wordt opgesteld met betrekking tot de kost voor deployment en support. De kost om een privaat 5G-netwerk te creëren is hoog, het is dus een logische redenering om te concluderen dat enkel bij grote ziekenhuizen deze kost vaak verantwoord kan worden. Echter, er zal een afweging moeten worden gemaakt ten opzichte van de productiviteitsboost door de alarmmoeheidvermindering.
+
+% Kopieer en plak hier de samenvatting (abstract) van je onderzoeksvoorstel.
+
+% Verwijzing naar het bestand met de inhoud van het onderzoeksvoorstel
+\input{../voorstel/voorstel-inhoud}
+
+%%---------- Andere bijlagen --------------------------------------------------
+% TODO: Voeg hier eventuele andere bijlagen toe. Bv. als je deze BP voor de
+% tweede keer indient, een overzicht van de verbeteringen t.o.v. het origineel.
+%\input{...}
+
+\chapter{Installatiegids Open5GS en UERANSIM}
+\label{ch:InstallationGuide}
+\input{installation-guide}
+
+\chapter{Vagrant automatisatie}
+\label{ch:vagrant}
+\input{automation}
+
+
+%%---------- Backmatter, referentielijst ---------------------------------------
+
+\backmatter{}
+
+\setlength\bibitemsep{2pt} %% Add Some space between the bibliograpy entries
+\printbibliography[heading=bibintoc]
+
+\end{document}
